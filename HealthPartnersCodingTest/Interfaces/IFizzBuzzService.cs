@@ -7,3 +7,4 @@ namespace HealthPartnersCodingTest.Interfaces
         string GetStringValue();
     }
 }
+    
