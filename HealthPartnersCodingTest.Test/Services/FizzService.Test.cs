@@ -18,10 +18,10 @@ namespace HealthPartnersCodingTest.Test.Services
         }
 
         [Theory]
-        [InlineData(5)]
-        [InlineData(10)]
-        [InlineData(15)]
-        [InlineData(20)]
+        [InlineData(3)]
+        [InlineData(6)]
+        [InlineData(9)]
+        [InlineData(12)]
         public void IsValidFizz(int n)
         {
             // arrange
@@ -32,11 +32,12 @@ namespace HealthPartnersCodingTest.Test.Services
             Assert.True(isValid);
         }
 
+
         [Theory]
-        [InlineData(3)]
-        [InlineData(6)]
-        [InlineData(9)]
-        [InlineData(12)]
+        [InlineData(5)]
+        [InlineData(10)]
+        [InlineData(16)]
+        [InlineData(20)]
         public void IsInvalidFizz(int n)
         {
             // arrange

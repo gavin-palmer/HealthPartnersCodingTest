@@ -5,8 +5,6 @@ namespace HealthPartnersCodingTest.Services
 {
     public class BuzzService: IFizzBuzzService
     {
-        private string _value = "Buzz";
-
         public string GetStringValue()
         {
             return "Buzz";
