@@ -7,7 +7,5 @@ namespace HealthPartnersCodingTest.Interfaces
     {
         void Calculate();
         void ProcessValue(int i);
-        void PrintValue(int i, string value);
-        List<IFizzBuzzService> GetServices();
     }
 }

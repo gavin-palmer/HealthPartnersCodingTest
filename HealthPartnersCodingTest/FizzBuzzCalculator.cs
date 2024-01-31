@@ -7,12 +7,19 @@ namespace HealthPartnersCodingTest
 {
     public class FizzBuzzCalculator: IFizzBuzzCalculator
     {
+        public FizzBuzzCalculator() { }
+        // for unit tests
+        public FizzBuzzCalculator(int counter, List<IFizzBuzzService> services)
+        {
+            _counter = counter;
+            _services = services;
+        }
 
         private List<IFizzBuzzService> _services;
         private readonly int _counter = 100;
         public void Calculate()
         {
-            _services = GetServices();
+             GetServices();
 
             for (var i = 1; i <= _counter; i++)
             {
@@ -34,7 +41,7 @@ namespace HealthPartnersCodingTest
             PrintValue(i, value);
         }
 
-        public void PrintValue(int i, string value)
+        private void PrintValue(int i, string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -46,15 +53,15 @@ namespace HealthPartnersCodingTest
             }
         }
 
-        public List<IFizzBuzzService> GetServices()
+        private void GetServices()
         {
-            var serviceTypes = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IFizzBuzzService))).ToList();
+            if (_services == null)
+            {
+                var serviceTypes = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(mytype => mytype.GetInterfaces().Contains(typeof(IFizzBuzzService))).ToList();
 
-            var services = serviceTypes.Select(type => (IFizzBuzzService)Activator.CreateInstance(type)).OrderByDescending(x => x.GetType().Name).ToList();
-
-            return services;
-
+                _services = serviceTypes.Select(type => (IFizzBuzzService)Activator.CreateInstance(type)).OrderByDescending(x => x.GetType().Name).ToList();
+            }
         }
     }
 }
